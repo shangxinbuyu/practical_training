@@ -1,14 +1,15 @@
 <template>
-
+  <VotingSystem/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import VotingSystem from "@/components/VotingSystem.vue";
 
 export default {
+  
   name: 'App',
   components: {
-    HelloWorld
+    VotingSystem
   }
 }
 </script>
