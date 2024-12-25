@@ -1,6 +1,6 @@
 <template>
   <el-container class="container">
-    <el-header class="header" style="height: 120px;">
+    <el-header class="header" style="height: 80px;">
       <h1>投票系统</h1>
     </el-header>
     <el-container>
@@ -35,10 +35,12 @@ export default {
 }
 
 .header {
-  line-height: 30px;
-  text-align: center;
+  line-height: 80px;
+  text-align: left;
   font-size: 25px;
-  background-color: #dddddd
+  background-color: #09d9ed;
+  border-radius: 8px;
+  
 }
 
 </style>

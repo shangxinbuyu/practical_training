@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container class="main-container">
     <router-view></router-view>
   </el-container>
 </template>
@@ -15,9 +15,5 @@ export default {
 </script>
 
 <style scoped>
-div {
-  width: 100px;
-  height: 100px;
-  background-color: orange;
-}
+
 </style>
