@@ -1,9 +1,10 @@
 <template>
-  
-  <el-container style="height: 700px; border: 1px solid #eee">
-    <el-header>Header</el-header>
+  <el-container class="container">
+    <el-header class="header" style="height: 120px;">
+      <h1>投票系统</h1>
+    </el-header>
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="300px">
         <Nav/>
       </el-aside>
       <el-main>
@@ -28,5 +29,16 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  height: 700px;
+  border: 1px solid #eee;
+}
+
+.header {
+  line-height: 30px;
+  text-align: center;
+  font-size: 25px;
+  background-color: #dddddd
+}
 
 </style>
