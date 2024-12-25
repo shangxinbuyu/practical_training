@@ -45,22 +45,22 @@ export default {
           date: '2016-05-02',
           title: '王小虎',
           sponsor: '赵六',
-          state:'投票中'
+          state: '投票中'
         }, {
           date: '2016-05-04',
           title: '王小虎',
           sponsor: '王五',
-          state:'投票中'
+          state: '投票中'
         }, {
           date: '2016-05-01',
           title: '王小虎',
           sponsor: '李四',
-          state:'投票中'
+          state: '投票中'
         }, {
           date: '2016-05-03',
           title: '王小虎',
           sponsor: '张三',
-          state:'投票中'
+          state: '投票中'
         }
       ],
       dialogFormVisible: false,
