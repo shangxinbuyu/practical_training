@@ -22,9 +22,6 @@ export default {
 </script>
 
 <style scoped>
-/*.el-menu-item{*/
-/*  font-size: 20px;*/
-/*  border: 1px solid rgba(0, 0, 0, 0.32);*/
-/*}*/
+
 
 </style>
