@@ -1,26 +1,26 @@
 <template>
- <div id="app">
-   <body class="meau">
+  <div id="app" class="login">
     <div class="formBox">
       <form action="" class="FORMF">
         <br>
-         <router-link to="/studentlogin" id="tatle">学生登录</router-link>
-         <router-link to="/adminlogin" id="tatle">管理员登录</router-link>
+        <router-link id="title" to="StudentLogin">学生登录</router-link>
+        <router-link id="title" to="AdminLogin">管理员登录</router-link>
         <div>
           <router-view></router-view>
         </div>
       </form>
     </div>
-  </body>
- </div>
+  </div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: "Login",
+}
 </script>
 
 <style scoped>
-.meau {
+.login {
   position: relative;
   padding: 40vh;
   background-image: linear-gradient(125deg, #ff0000, #4562e0, #da6262, #ffbb00);
@@ -32,24 +32,17 @@ export default {}
   0% {
     background-position: 0% 50%;
   }
-
+  
   50% {
     background-position: 100% 50%;
   }
-
+  
   100% {
     background-position: 0% 50%;
   }
 }
 
-.kuang {
-  width: 350px;
-  height: 35px;
-  border-radius: 15px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
+
 
 .formBox {
   width: 460px;
@@ -62,7 +55,7 @@ export default {}
   opacity: 0.6;
 }
 
- #tatle {
+#title {
   text-decoration: none;
   text-align: center;
   color: black;
@@ -71,9 +64,9 @@ export default {}
   font-weight: 800;
 }
 
- #tatle.router-link-active{
-  color:aquamarine;
-
+#title.router-link-active {
+  color: aquamarine;
+  
 }
 
 .inbox {
@@ -101,4 +94,5 @@ export default {}
   margin-left: auto;
   margin-right: auto;
 }
+
 </style>

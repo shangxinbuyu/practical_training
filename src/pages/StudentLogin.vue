@@ -1,35 +1,48 @@
 <template>
   <div id="app">
     <div class="formBox">
-    <form action="" class="FORMF">
-      <p><input type="text" name="" id="" class="kuang" placeholder="账号/学号"></p>
-      <p><input type="password" name="" id="" class="kuang" placeholder="密码"></p>
-      <a href="" class="kuang">找回密码</a>
+      <p><input id="" class="inputBox" name="" placeholder="账号/学号" type="text"></p>
+      <p><input id="" class="inputBox" name="" placeholder="密码" type="password"></p>
+      <a class="inputBox" href="">找回密码</a>
       <div class="inbox">
         <nav class="box1">
-          <input type="submit" value="登录" class="w">&nbsp;&nbsp;
-         <input type="button" value="注册" class="w2" @click="clickseach">
+          <input class="w" type="submit" value="登录" @click="login">&nbsp;&nbsp;
+          <input class="w2" type="button" value="注册" @click="clickseach">
         </nav>
       </div>
-    </form>
-  </div>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  methods:{
-   clickseach() {
-    // 执行一些逻辑后...
-    this.$router.push({ path: '/registerlogin' });
-  }
-}
+import login from "@/components/Login.vue";
 
+export default {
+  name: "StudentLogin",
+  computed: {
+
+  },
+  methods: {
+    clickseach() {
+      // 执行一些逻辑后...
+      this.$router.push({name:'RegisterLogin'});
+    },
+    login() {
+      this.$router.push({name:'VotingSystem'})
+    }
+  }
+  
 }
 </script>
 
 <style scoped>
-.kuang {
+* {
+  margin-bottom: 20px;
+}
+
+.inputBox {
+  padding-left: 10px;
+  margin-top: 30px;
   text-decoration: none;
   color: rgb(115, 137, 156);
   width: 350px;
@@ -40,14 +53,6 @@ export default {
   display: block;
 }
 
-.tatle {
-  text-align: center;
-  color: rgb(0, 136, 255);
-  margin-top: 40px;
-  margin-left: 100px;
-  font-weight: 800;
-}
-
 .inbox {
   width: 350px;
   height: 35px;
@@ -56,7 +61,9 @@ export default {
   display: block;
 }
 
+
 .w, .w2 {
+  
   width: 160px;
   height: 40px;
   border-radius: 15px;

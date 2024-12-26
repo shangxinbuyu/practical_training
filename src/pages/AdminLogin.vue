@@ -1,41 +1,37 @@
 <template>
   <div id="app">
     <div class="formBox">
-    <form action="" class="FORMF">
-      <p><input type="text" name="" id="" class="kuang" placeholder="管理员账号"></p>
-      <p><input type="password" name="" id="" class="kuang" placeholder="密码"></p>
+      <p><input id="" class="inputBox" name="" placeholder="管理员账号" type="text"></p>
+      <p><input id="" class="inputBox" name="" placeholder="密码" type="password"></p>
       <div class="inbox">
         <nav class="box1">
-          <input type="submit" value="登录" class="w">
+          <input class="w" type="submit" value="登录">
         </nav>
       </div>
-    </form>
-  </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-
+  name: "AdminLogin",
+  
 }
 </script>
 
 <style scoped>
-.kuang {
+
+.inputBox {
+  padding-left: 10px;
+  margin-top: 30px;
+  text-decoration: none;
+  color: rgb(115, 137, 156);
   width: 350px;
   height: 35px;
   border-radius: 15px;
   margin-left: auto;
   margin-right: auto;
   display: block;
-}
-
-.tatle {
-  text-align: center;
-  color: rgb(0, 136, 255);
-  margin-top: 40px;
-  margin-left: 100px;
-  font-weight: 800;
 }
 
 .inbox {
@@ -46,7 +42,8 @@ export default {
   display: block;
 }
 
-.w, .w2 {
+.w {
+  margin-top: 85px;
   width: 160px;
   height: 40px;
   border-radius: 15px;

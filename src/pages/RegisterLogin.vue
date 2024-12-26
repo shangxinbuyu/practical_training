@@ -4,9 +4,9 @@
     <h2>注册</h2>
     <div class="formBox">
       <form action="" class="FORMF">
-        <p><input type="text" class="kuang0" placeholder="请输入用户账号" required></p>
-        <p><input type="password" class="kuang1" placeholder="密码" v-model="pwd1"></p>
-        <p><input type="password" class="kuang2" placeholder="请再次输入密码" v-model="pwd2"></p>
+        <p><input type="text" class="inputBox" placeholder="请输入用户账号" required></p>
+        <p><input type="password" class="inputBox" placeholder="密码" v-model="pwd1"></p>
+        <p><input type="password" class="inputBox" placeholder="请再次输入密码" v-model="pwd2"></p>
         <div class="inbox">
           <nav class="box1">
             <input type="button" value="注册" class="w" @click="login">
@@ -49,9 +49,8 @@ h2 {
   text-align: center;
 }
 
-.kuang0,
-.kuang1,
-.kuang2 {
+.inputBox {
+  margin-top: 15px;
   width: 350px;
   height: 35px;
   border-radius: 15px;
@@ -60,13 +59,6 @@ h2 {
   display: block;
 }
 
-.tatle {
-  text-align: center;
-  color: rgb(0, 136, 255);
-  margin-top: 40px;
-  margin-left: 100px;
-  font-weight: 800;
-}
 
 .inbox {
   width: 350px;
@@ -76,8 +68,8 @@ h2 {
   display: block;
 }
 
-.w,
-.w2 {
+.w{
+  margin-top: 20px;
   width: 160px;
   height: 40px;
   border-radius: 15px;

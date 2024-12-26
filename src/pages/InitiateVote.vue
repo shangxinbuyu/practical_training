@@ -19,7 +19,7 @@
       <el-table-column label="操作">
         <template v-slot="scope">
           <el-button size="small" type="text" @click="handleClick(scope.row)">编辑</el-button>
-          <el-button size="small" type="text">删除</el-button>
+          <el-button size="small" type="text" @click="deleteById(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -113,7 +113,7 @@ export default {
     },
     getVoteInfo() {
       axios({
-        method: 'get',
+        method: 'GET',
         url: `${this.url}/list`,
       }).then(
           response => {
@@ -130,7 +130,7 @@ export default {
         return
       }
       axios({
-        method: 'get',
+        method: 'GET',
         url: `${this.url}/like`,
         params: {
           like: this.likeInput
@@ -149,6 +149,22 @@ export default {
         item.publishTime = dayjs(item.publishTime).format('YY-MM-DD HH:mm')
         return item
       })
+    },
+    deleteById(id) {
+      axios({
+        method: 'GET',
+        url: `${this.url}/delete`,
+        params: {
+          id
+        }
+      }).then(
+          () => {
+            this.getVoteInfo()
+          },
+          error => {
+            alert(error.message)
+          }
+      )
     }
   },
   mounted() {

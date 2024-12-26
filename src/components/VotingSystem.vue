@@ -16,8 +16,10 @@
 </template>
 
 <script>
+
+
+import Main from "@/components/Main";
 import Nav from "@/components/Nav.vue";
-import Main from "@/components/Main.vue";
 
 export default {
   name: "VotingSystem",

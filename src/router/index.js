@@ -1,27 +1,56 @@
-import VueRouter from"vue-router"
-
+import VueRouter from "vue-router"
+import Login from "@/components/Login.vue";
+import StudentLogin from "@/pages/StudentLogin.vue";
+import AdminLogin from "@/pages/AdminLogin.vue";
+import RegisterLogin from "@/pages/RegisterLogin.vue";
+import VotingSystem from "@/components/VotingSystem.vue";
 import InitiateVote from "@/pages/InitiateVote.vue";
 import VoteList from "@/pages/VoteList.vue";
-import StudentLogin from '@/pages/StudentLogin.vue'
-import AdminLogin from '@/pages/AdminLogin.vue'
-import RegisterLogin from '@/pages/RegisterLogin.vue'
 
 
 const router = new VueRouter({
   mode: "history",
-  routes:[//InitiateVote
+  routes: [
     {
-      path:"/InitiateVote",
-      component:InitiateVote,
+      path: "/",
+      name: "Home",
+      component: Login,
+      redirect: "/StudentLogin",
+      children: [
+        {
+          path: "StudentLogin",
+          name: "StudentLogin",
+          component: StudentLogin
+        },
+        {
+          path: "AdminLogin",
+          name: "AdminLogin",
+          component: AdminLogin
+        },
+        {
+          path: "RegisterLogin",
+          name: "RegisterLogin",
+          component: RegisterLogin
+        }
+      ]
     },
     {
-      path:"/VoteList",
-      component:VoteList,
-    },
-    { path: '/', component: StudentLogin },
-    { path: '/studentlogin', component: StudentLogin },
-    { path: '/adminlogin', component: AdminLogin },
-    { path: '/registerlogin', component: RegisterLogin }
+      path: "/VotingSystem",
+      name: "VotingSystem",
+      component: VotingSystem,
+      children: [
+        {
+          path: "InitiateVote",
+          name: "InitiateVote",
+          component: InitiateVote
+        },
+        {
+          path: "VoteList",
+          name: "VoteList",
+          component: VoteList
+        }
+      ]
+    }
   ]
 })
 

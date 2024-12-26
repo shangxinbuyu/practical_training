@@ -1,14 +1,18 @@
 <template>
-  <VotingSystem/>
+<!--  <VotingSystem/>-->
+  <router-view></router-view>
 </template>
 
 <script>
+
+import Login from "@/components/Login.vue";
 import VotingSystem from "@/components/VotingSystem.vue";
 
 export default {
   
   name: 'App',
   components: {
+    Login,
     VotingSystem
   }
 }
