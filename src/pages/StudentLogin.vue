@@ -6,8 +6,8 @@
       <a class="inputBox" href="">找回密码</a>
       <div class="inbox">
         <nav class="box1">
-          <input class="w" type="submit" value="登录" @click="login">&nbsp;&nbsp;
-          <input class="w2" type="button" value="注册" @click="clickseach">
+          <button @click="login">登录</button>
+          <button @click="register">注册</button>
         </nav>
       </div>
     </div>
@@ -15,20 +15,16 @@
 </template>
 
 <script>
-import login from "@/components/Login.vue";
-
 export default {
   name: "StudentLogin",
-  computed: {
-
-  },
+  computed: {},
   methods: {
-    clickseach() {
+    register() {
       // 执行一些逻辑后...
-      this.$router.push({name:'RegisterLogin'});
+      this.$router.push({name: 'RegisterLogin'});
     },
     login() {
-      this.$router.push({name:'VotingSystem'})
+      this.$router.push({name: 'VotingSystem'})
     }
   }
   
@@ -62,8 +58,7 @@ export default {
 }
 
 
-.w, .w2 {
-  
+button {
   width: 160px;
   height: 40px;
   border-radius: 15px;

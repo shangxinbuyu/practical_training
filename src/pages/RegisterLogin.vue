@@ -1,18 +1,15 @@
 <template>
   <div id="app">
-
     <h2>注册</h2>
     <div class="formBox">
-      <form action="" class="FORMF">
-        <p><input type="text" class="inputBox" placeholder="请输入用户账号" required></p>
-        <p><input type="password" class="inputBox" placeholder="密码" v-model="pwd1"></p>
-        <p><input type="password" class="inputBox" placeholder="请再次输入密码" v-model="pwd2"></p>
-        <div class="inbox">
-          <nav class="box1">
-            <input type="button" value="注册" class="w" @click="login">
-          </nav>
-        </div>
-      </form>
+      <p><input class="inputBox" placeholder="请输入用户账号" required type="text"></p>
+      <p><input v-model="pwd1" class="inputBox" placeholder="密码" type="password"></p>
+      <p><input v-model="pwd2" class="inputBox" placeholder="请再次输入密码" type="password"></p>
+      <div class="inbox">
+        <nav class="box1">
+          <button @click="login">注册</button>
+        </nav>
+      </div>
     </div>
   </div>
 </template>
@@ -26,19 +23,19 @@ export default {
     }
   },
   methods: {
-
-      login() {
-        if (this.pwd1 === this.pwd2) {
-          // 密码一致，可以进行下一步操作
-          console.log('密码一致');
-          
-          // 这里可以添加其他逻辑，例如发送请求到服务器进行注册等
-        } else {
-          // 密码不一致，提示用户
-          return alert('两次输入的密码不一致，请重新输入');
-        }
+    
+    login() {
+      if (this.pwd1 === this.pwd2) {
+        // 密码一致，可以进行下一步操作
+        console.log('密码一致');
+        
+        // 这里可以添加其他逻辑，例如发送请求到服务器进行注册等
+      } else {
+        // 密码不一致，提示用户
+        return alert('两次输入的密码不一致，请重新输入');
       }
-      
+    }
+    
     
   }
 }
@@ -68,7 +65,7 @@ h2 {
   display: block;
 }
 
-.w{
+button {
   margin-top: 20px;
   width: 160px;
   height: 40px;
