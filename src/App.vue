@@ -1,5 +1,5 @@
 <template>
-<!--  <VotingSystem/>-->
+  <!--  <VotingSystem/>-->
   <router-view></router-view>
 </template>
 
@@ -19,11 +19,13 @@ export default {
 </script>
 
 <style>
-*{
+
+* {
   padding: 0;
   margin: 0;
 }
-a{
+
+a {
   text-decoration: none;
 }
 </style>

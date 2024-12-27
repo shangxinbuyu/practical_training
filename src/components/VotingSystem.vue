@@ -32,7 +32,7 @@ export default {
 
 <style scoped>
 .container {
-  height: 700px;
+  /*height: 1200px;*/
   border: 1px solid #eee;
 }
 

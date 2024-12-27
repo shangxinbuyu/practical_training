@@ -41,7 +41,7 @@
           </div>
         </div>
       </div>
-
+      
       <!-- 饼图区域 -->
       <div class="chart-box pie-chart-box">
         <h3>投票占比</h3>
@@ -50,8 +50,8 @@
         </div>
       </div>
     </div>
-
-    <!-- 右侧表格 - 简化版本 -->
+    
+    <!-- 右侧表格 -->
     <div class="right-section">
       <el-table :data="chartData" style="width: 100%">
         <el-table-column prop="name" label="选项" align="center" />
@@ -61,178 +61,125 @@
   </div>
 </template>
 
-<script setup>
-import * as echarts from 'echarts';
-import { ref, computed, onMounted } from 'vue';
+<script>
+import * as echarts from 'echarts'
 
-const pieChart = ref(null);
-const lineChart = ref(null);
-
-// 简化投票数据，移除不必要的 id
-const chartData = ref([
-  { name: '赞同', value: 235 },
-  { name: '反对', value: 274 },
-  { name: '弃权', value: 310 }
-])
-
-// 计算总票数
-const totalVotes = computed(() => {
-  return chartData.value.reduce((sum, item) => sum + item.value, 0)
-})
-
-// 获取指定类型的票数
-const getVotesByType = (type) => {
-  const item = chartData.value.find(item => item.name === type)
-  return item ? item.value : 0
-}
-
-// 获取指定类型的占比
-const getPercentageByType = (type) => {
-  const votes = getVotesByType(type)
-  return ((votes / totalVotes.value) * 100).toFixed(1)
-}
-
-// 修改初始化图表的函数
-const initChart = () => {
-  const chart = echarts.init(pieChart.value)
-  const option = {
-    title: {
-      left: 'center'
+export default {
+  name: 'VoteList',
+  
+  data() {
+    return {
+      chartData: [
+        { name: '赞同', value: 235 },
+        { name: '反对', value: 274 },
+        { name: '弃权', value: 310 }
+      ]
+    }
+  },
+  
+  computed: {
+    totalVotes() {
+      return this.chartData.reduce((sum, item) => sum + item.value, 0)
+    }
+  },
+  
+  methods: {
+    getVotesByType(type) {
+      const item = this.chartData.find(item => item.name === type)
+      return item ? item.value : 0
     },
-    tooltip: {
-      trigger: 'item'
+    
+    getPercentageByType(type) {
+      const votes = this.getVotesByType(type)
+      return ((votes / this.totalVotes) * 100).toFixed(1)
     },
-    legend: {
-      data: ['赞同', '反对', '弃权'],
-      top: 0,
-      left: 'center',
-      itemWidth: 25,
-      itemHeight: 14,
-      itemGap: 25,
-      textStyle: {
-        fontSize: 14
-      }
-    },
-    series: [
-      {
-        type: 'pie',
-        radius: ['40%', '70%'],
-        center: ['50%', '60%'],
-        avoidLabelOverlap: false,
-        itemStyle: {
-          borderRadius: 2,
-          borderWidth: 2,
-          borderColor: '#fff'
+    
+    initChart() {
+      const chart = echarts.init(this.$refs.pieChart)
+      const option = {
+        title: {
+          left: 'center'
         },
-        label: {
-          show: true,
-          position: 'outside',
-          formatter: '{b}\n{c}票 ({d}%)',
-          fontSize: 14,
-          color: '#666'
+        tooltip: {
+          trigger: 'item'
         },
-        labelLine: {
-          show: true,
-          length: 15,
-          length2: 15,
-          smooth: true
-        },
-        data: chartData.value.map(item => ({
-          value: item.value,
-          name: item.name,
-          itemStyle: { 
-            color: item.name === '赞同' ? '#5470c6' : 
-                   item.name === '反对' ? '#91cc75' : '#fac858'
+        legend: {
+          data: ['赞同', '反对', '弃权'],
+          top: 0,
+          left: 'center',
+          itemWidth: 25,
+          itemHeight: 14,
+          itemGap: 25,
+          textStyle: {
+            fontSize: 14
           }
-        }))
+        },
+        series: [
+          {
+            type: 'pie',
+            radius: ['40%', '70%'],
+            center: ['50%', '60%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+              borderRadius: 2,
+              borderWidth: 2,
+              borderColor: '#fff'
+            },
+            label: {
+              show: true,
+              position: 'outside',
+              formatter: '{b}\n{c}票 ({d}%)',
+              fontSize: 14,
+              color: '#666'
+            },
+            labelLine: {
+              show: true,
+              length: 15,
+              length2: 15,
+              smooth: true
+            },
+            data: this.chartData.map(item => ({
+              value: item.value,
+              name: item.name,
+              itemStyle: {
+                color: item.name === '赞同' ? '#5470c6' :
+                    item.name === '反对' ? '#91cc75' : '#fac858'
+              }
+            }))
+          }
+        ]
       }
-    ]
+      chart.setOption(option)
+      this.pieChart = chart
+    },
+    
+    handleResize() {
+      if (this.pieChart) {
+        this.pieChart.resize()
+      }
+    }
+  },
+  
+  mounted() {
+    this.initChart()
+    window.addEventListener('resize', this.handleResize)
+  },
+  
+  beforeDestroy() {
+    window.removeEventListener('resize', this.handleResize)
+    if (this.pieChart) {
+      this.pieChart.dispose()
+    }
   }
-  chart.setOption(option)
 }
-
-// 初始化折线图
-const initLineChart = () => {
-  const chart = echarts.init(lineChart.value);
-  const option = {
-    grid: {
-      top: '10%',
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      axisLine: {
-        lineStyle: {
-          color: '#eee'
-        }
-      },
-      data: Array.from({ length: 100 }, (_, i) => i)
-    },
-    yAxis: {
-      type: 'value',
-      splitLine: {
-        lineStyle: {
-          color: '#eee'
-        }
-      }
-    },
-    series: [{
-      data: Array.from({ length: 100 }, () => Math.floor(Math.random() * 500)),
-      type: 'line',
-      smooth: true,
-      showSymbol: false,
-      areaStyle: {
-        color: {
-          type: 'linear',
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [{
-            offset: 0,
-            color: 'rgba(255, 107, 107, 0.4)'
-          }, {
-            offset: 1,
-            color: 'rgba(255, 107, 107, 0.1)'
-          }]
-        }
-      },
-      itemStyle: {
-        color: '#FF6B6B'
-      },
-      lineStyle: {
-        width: 2,
-        color: '#FF6B6B'
-      }
-    }]
-  };
-  chart.setOption(option);
-}
-
-// 修改 onMounted
-onMounted(() => {
-  initChart();
-  initLineChart();
-})
-
-// 修改窗口大小变化监听
-window.addEventListener('resize', () => {
-  const pieChartInstance = echarts.getInstanceByDom(pieChart.value);
-  const lineChartInstance = echarts.getInstanceByDom(lineChart.value);
-  if (pieChartInstance) pieChartInstance.resize();
-  if (lineChartInstance) lineChartInstance.resize();
-})
 </script>
 
 <style scoped>
 .vote-container {
+  width: 100%;
   padding: 20px;
   background-color: #f5f7fa;
-  min-height: 100vh;
+  min-height: 86vh;
   display: flex;
   gap: 24px;
 }

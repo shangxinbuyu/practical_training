@@ -1,7 +1,12 @@
 <template>
   <el-main class="page">
-    <el-input v-model="likeInput" placeholder="请输入内容"></el-input>
-    <el-button plain @click="like">搜索</el-button>
+    <el-row>
+      <el-input v-model="likeInput" placeholder="请输入内容"></el-input>
+      <el-button plain @click="like">搜索</el-button>
+      
+      <el-button @click="createVote">创建投票</el-button>
+    
+    </el-row>
     <el-table :data="voteInfo">
       <el-table-column label="选择" width="140">
         <input type="checkbox">
@@ -18,30 +23,37 @@
       </el-table-column>
       <el-table-column label="操作">
         <template v-slot="scope">
-          <el-button size="small" type="text" @click="handleClick(scope.row)">编辑</el-button>
+          <el-button size="small" type="text" @click="edit(scope.row)">编辑</el-button>
           <el-button size="small" type="text" @click="deleteById(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
     
     
-    <el-dialog :visible.sync="dialogFormVisible" title="修改">
-      <el-form :model="form">
+    <el-dialog :visible.sync="changeDialogFormVisible" title="修改">
+      <el-form :model="changeForm">
         <el-form-item :label-width="formLabelWidth" label="修改投票状态">
-          <el-select v-model="form.state" :placeholder="row.state">
+          <el-select v-model="changeForm.state" :placeholder="row.state">
             <el-option label="投票中" value="投票中"></el-option>
             <el-option label="投票截至" value="投票截至"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item :label-width="formLabelWidth" label="修改投票项目">
-          <el-input v-model="form.title" placeholder="请输入内容" style="width: 218px"></el-input>
+          <el-input v-model="changeForm.title" placeholder="请输入内容" style="width: 218px"></el-input>
         </el-form-item>
       </el-form>
-      
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogSelection(0)">取 消</el-button>
         <el-button type="primary" @click="dialogSelection(1)">确 定</el-button>
       </div>
+    </el-dialog>
+    
+    <el-dialog :visible.sync="createDialogFormVisible" title="创建投票">
+      <el-form :model="changeForm">
+        <el-form-item :label-width="formLabelWidth" label="投票项目">
+          <el-input placeholder="请输入投票项目" v-model="createVoteForm.title"></el-input>
+        </el-form-item>
+      </el-form>
     </el-dialog>
   </el-main>
 </template>
@@ -57,12 +69,14 @@ export default {
       // 投票列表
       voteInfo: [],
       // 控制表单是否弹出
-      dialogFormVisible: false,
+      changeDialogFormVisible: false,
+      createDialogFormVisible: false,
       // 表单收集的收集
-      form: {
+      changeForm: {
         state: '',
         title: ''
       },
+      createVoteForm: {},
       // 表单宽度
       formLabelWidth: '120px',
       // 当前操作的
@@ -73,21 +87,24 @@ export default {
     }
   },
   methods: {
+    createVote() {
+      this.createDialogFormVisible = true;
+    },
     // 点击修改按钮
-    handleClick(row) {
-      this.dialogFormVisible = true
+    edit(row) {
+      this.changeDialogFormVisible = true
       this.row = row
-      this.form.state = row.state
-      this.form.title = row.title
+      this.changeForm.state = row.state
+      this.changeForm.title = row.title
     },
     // 退出表单
     dialogSelection(value) {
-      this.dialogFormVisible = false
+      this.changeDialogFormVisible = false
       if (!value) {
         return
       }
       
-      if (this.row.title === this.form.title && this.row.state === this.form.state) {
+      if (this.row.title === this.changeForm.title && this.row.state === this.changeForm.state) {
         return;
       }
       
@@ -97,8 +114,8 @@ export default {
         url: `${this.url}/change`,
         data: {
           id: this.row.id,
-          state: this.form.state || this.row.state,
-          title: this.form.title || this.row.title
+          state: this.changeForm.state || this.row.state,
+          title: this.changeForm.title || this.row.title
         }
       }).then(
           response => {
@@ -174,6 +191,7 @@ export default {
 </script>
 
 <style scoped>
+
 .el-input {
   width: 200px;
 }
